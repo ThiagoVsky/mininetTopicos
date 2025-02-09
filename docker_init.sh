@@ -14,18 +14,23 @@
 
 #inicializa o container oficial do Ryu
 xterm -e \
+		"echo 'Ryu-docker ' && \
 		sudo docker run -it --privileged -e DISPLAY=$DISPLAY \
+		--network mininet_net \
+		--ip 100.100.100.2 \
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		-v /lib/modules:/lib/modules \
-		osrg/ryu-book
+		osrg/ryu-book" &
 
 	cd mn/
 
 #inicializa o container do mininer
 xterm -e \
-	sudo docker build -t mininet . & \
-	xterm -e \
-	sudo docker run -it --rm --privileged -e DISPLAY \
-	-v /tmp/.X11-unix:/tmp/.X11-unix \
-	-v /lib/modules:/lib/modules \
-	mininet &
+		"echo 'mininet' && \
+		sudo docker build -t mininet . && \
+		sudo docker run -it --rm --privileged -e DISPLAY \
+		--network mininet_net \
+		--ip 100.100.100.3 \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		-v /lib/modules:/lib/modules \
+		mininet" &
