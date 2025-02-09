@@ -8,14 +8,12 @@
 #Python 3.8.20 como base
 FROM kiemtcb/ryu
 
-COPY entrypoint.sh /
-COPY ryu_qos_ips.py /
+COPY entrypoint.sh /home
+COPY ryu_qos_ips.py /home
 
 # Atualizar o sistema e instalar dependências necessárias
-RUN pip install --upgrade pip \
-    && touch /etc/network/interfaces \
-    && chmod +x /entrypoint.sh 
+# RUN chmod +x ~/entrypoint.sh 
 
 EXPOSE 6653
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["bash"]

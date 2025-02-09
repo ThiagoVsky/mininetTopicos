@@ -16,6 +16,7 @@ COPY TopoTopicos.py /
 # Atualizar o sistema e instalar dependências necessárias
 RUN apt update && apt install -y --no-install-recommends \
     curl \
+    telnet \
     dnsutils \
     ifupdown \
     iproute2 \

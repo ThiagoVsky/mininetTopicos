@@ -15,12 +15,14 @@
 #inicializa o container oficial do Ryu
 xterm -e \
 		"echo 'Ryu-docker ' && \
+		cd ryu/ && \
+		sudo docker build -t ryu-topicos . && \
 		sudo docker run -it --privileged -e DISPLAY=$DISPLAY \
 		--network mininet_net \
 		--ip 100.100.100.2 \
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		-v /lib/modules:/lib/modules \
-		osrg/ryu-book" &
+		ryu-topicos" &
 
 	cd mn/
 
